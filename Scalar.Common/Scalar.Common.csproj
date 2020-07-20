@@ -17,23 +17,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(PkgNuGet_CommandLine)\tools\nuget.exe"
-          CopyToOutputDirectory="PreserveNewest"
-          Visible="false"
-          LinkBase="$(ExternalBinariesDirectoryName)"
-          Condition="$(RuntimeIdentifier.StartsWith('win'))" />
+    <None Include="$(PkgNuGet_CommandLine)\tools\nuget.exe" CopyToOutputDirectory="PreserveNewest" Visible="false" LinkBase="$(ExternalBinariesDirectoryName)" Condition="$(RuntimeIdentifier.StartsWith('win'))" />
   </ItemGroup>
 
   <Target Name="_GenerateConstantsFile" BeforeTargets="BeforeBuild">
     <!-- Generate Scalar constants file with the minimum Git version -->
-    <GenerateScalarConstants MinimumGitVersion="$(MinimumGitVersion)"
-                             ExternalBinariesDirectoryName="$(ExternalBinariesDirectoryName)"
-                             OutputFile="$(IntermediateOutputPath)ScalarConstants.g.cs" />
+    <GenerateScalarConstants MinimumGitVersion="$(MinimumGitVersion)" ExternalBinariesDirectoryName="$(ExternalBinariesDirectoryName)" OutputFile="$(IntermediateOutputPath)ScalarConstants.g.cs" />
 
     <!-- Add the generated file to the list of file writes for MSBuild to keep track of for clean-up -->
     <ItemGroup>
       <Compile Include="$(IntermediateOutputPath)ScalarConstants.g.cs" />
-      <FileWrites Include="$(IntermediateOutputPath)ScalarConstants.g.cs"/>
+      <FileWrites Include="$(IntermediateOutputPath)ScalarConstants.g.cs" />
     </ItemGroup>
   </Target>
 

@@ -207,11 +207,6 @@ namespace Scalar.Platform.Windows
             return WindowsPlatform.IsElevatedImplementation();
         }
 
-        public override bool IsProcessActive(int processId)
-        {
-            return WindowsPlatform.IsProcessActiveImplementation(processId, tryGetProcessById: true);
-        }
-
         public override void IsServiceInstalledAndRunning(string name, out bool installed, out bool running)
         {
             ServiceController service = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName.Equals(name, StringComparison.Ordinal));

@@ -1,7 +1,5 @@
-using Microsoft.Win32.SafeHandles;
 using Scalar.Common;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
@@ -33,37 +31,6 @@ namespace Scalar.Platform.Windows
             using (WindowsIdentity id = WindowsIdentity.GetCurrent())
             {
                 return new WindowsPrincipal(id).IsInRole(WindowsBuiltInRole.Administrator);
-            }
-        }
-
-        public static bool IsProcessActiveImplementation(int processId, bool tryGetProcessById)
-        {
-            using (SafeFileHandle process = NativeMethods.OpenProcess(NativeMethods.ProcessAccessFlags.QueryLimitedInformation, false, processId))
-            {
-                if (!process.IsInvalid)
-                {
-                    uint exitCode;
-                    if (NativeMethods.GetExitCodeProcess(process, out exitCode) && exitCode == StillActive)
-                    {
-                        return true;
-                    }
-                }
-                else if (tryGetProcessById)
-                {
-                    // The process.IsInvalid may be true when the process doesn't have access to call
-                    // OpenProcess for the specified processId. Fallback to slow way of finding process.
-                    try
-                    {
-                        Process.GetProcessById(processId);
-                        return true;
-                    }
-                    catch (ArgumentException)
-                    {
-                        return false;
-                    }
-                }
-
-                return false;
             }
         }
 

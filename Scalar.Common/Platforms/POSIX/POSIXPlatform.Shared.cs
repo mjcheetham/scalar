@@ -1,6 +1,4 @@
 using Scalar.Common;
-using System;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -12,20 +10,6 @@ namespace Scalar.Platform.POSIX
         {
             int euid = GetEuid();
             return euid == 0;
-        }
-
-        public static bool IsProcessActiveImplementation(int processId)
-        {
-            try
-            {
-                Process process = Process.GetProcessById(processId);
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
-
-            return true;
         }
 
         public static string GetNamedPipeNameImplementation(string enlistmentRoot, string dotScalarRoot)

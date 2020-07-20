@@ -129,11 +129,6 @@ namespace Scalar.UnitTests.Mock.Common
             throw new NotSupportedException();
         }
 
-        public override bool IsProcessActive(int processId)
-        {
-            return this.ActiveProcesses.Contains(processId);
-        }
-
         public override void IsServiceInstalledAndRunning(string name, out bool installed, out bool running)
         {
             throw new NotSupportedException();

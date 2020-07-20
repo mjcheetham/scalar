@@ -44,11 +44,6 @@ namespace Scalar.Platform.POSIX
             throw new NotImplementedException();
         }
 
-        public override bool IsProcessActive(int processId)
-        {
-            return POSIXPlatform.IsProcessActiveImplementation(processId);
-        }
-
         public override void IsServiceInstalledAndRunning(string name, out bool installed, out bool running)
         {
             throw new NotImplementedException();
